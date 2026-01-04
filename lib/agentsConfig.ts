@@ -417,3 +417,83 @@ export function getAgentById(id: string | null | undefined): AgentDefinition | n
   if (!id) return null;
   return AGENTS.find((a) => a.id === id) ?? null;
 }
+export const backendSupportTeam = [
+  {
+    id: 'ai-system-coordinator',
+    name: 'AI System Coordinator',
+    role: 'Coordinates all backend AI workers and routes tasks to the correct worker.',
+    responsibilities: [
+      'Receive system events and errors from other services',
+      'Route issues to the correct backend AI worker',
+      'Avoid duplicated work and conflicting actions',
+      'Maintain a high-level view of backend system status',
+      'Report summarized status to the business/owner',
+    ],
+  },
+  {
+    id: 'ai-quality-assurance-auditor',
+    name: 'AI Quality Assurance Auditor',
+    role: 'Reviews and validates changes made by other backend AI workers.',
+    responsibilities: [
+      'Review recent fixes, patches, and deployments',
+      'Run validation checks after changes are applied',
+      'Detect regressions or new issues caused by fixes',
+      'Flag incomplete or risky changes for further review',
+    ],
+  },
+  {
+    id: 'ai-automated-tester',
+    name: 'AI Automated Tester',
+    role: 'Continuously tests core flows, APIs, and endpoints.',
+    responsibilities: [
+      'Run scheduled tests on key API endpoints',
+      'Test critical website and app routes',
+      'Simulate core user flows regularly',
+      'Produce simple pass/fail reports for the coordinator',
+    ],
+  },
+  {
+    id: 'ai-error-classifier',
+    name: 'AI Error Classifier',
+    role: 'Reads raw errors and categorizes them by severity and type.',
+    responsibilities: [
+      'Ingest raw logs and error messages',
+      'Classify errors as critical, high, medium, or low',
+      'Tag errors by subsystem (API, frontend, provider, DB, etc.)',
+      'Forward structured error data to the correct worker',
+    ],
+  },
+  {
+    id: 'ai-patch-generator',
+    name: 'AI Patch Generator',
+    role: 'Generates suggested patches and fixes for issues.',
+    responsibilities: [
+      'Analyze errors and stack traces',
+      'Propose code-level patches or configuration changes',
+      'Create safe temporary workarounds where possible',
+      'Send patch suggestions to the AI Bug Fixer worker',
+    ],
+  },
+  {
+    id: 'ai-documentation-keeper',
+    name: 'AI Documentation Keeper',
+    role: 'Keeps a record of changes, fixes, and system state.',
+    responsibilities: [
+      'Log every applied change, fix, and deployment',
+      'Maintain a change history for the backend system',
+      'Summarize important changes in human-readable form',
+      'Help the owner understand what changed and why',
+    ],
+  },
+  {
+    id: 'ai-stability-forecaster',
+    name: 'AI Stability Forecaster',
+    role: 'Predicts potential future issues based on patterns and history.',
+    responsibilities: [
+      'Analyze historical errors and performance data',
+      'Identify recurring or growing problem areas',
+      'Warn about components at high risk of failure',
+      'Recommend preventative maintenance or refactors',
+    ],
+  },
+];
