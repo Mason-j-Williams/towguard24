@@ -9,3 +9,6 @@ export const agentsConfig = {
 };
 
 export type AgentKey = keyof typeof agentsConfig;
+export function getAgentById(id: string) {
+  return Object.values(agentsConfig).find(agent => agent.id === id);
+}
