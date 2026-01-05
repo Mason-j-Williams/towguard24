@@ -1,6 +1,6 @@
-import { marketingAgent } from "./agents/marketingAgent";
-import { supportAgent } from "./agents/supportAgent";
-import { salesAgent } from "./agents/salesAgent";
+import { marketingAgent } from "../app/agents/marketingAgent";
+import { supportAgent } from "../app/agents/supportAgent";
+import { salesAgent } from "../app/agents/salesAgent";
 
 export const agentsConfig = {
   marketing: marketingAgent,

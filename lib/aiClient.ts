@@ -1,23 +1,23 @@
-import OpenAI from "openai";
+import { openai } from "@ai-sdk/openai";
+import { generateText } from "ai";
 import { agentsConfig } from "./agentsConfig";
-
-const client = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
 
 export async function callAI(prompt: string, agent: keyof typeof agentsConfig) {
   if (!process.env.OPENAI_API_KEY) {
     throw new Error("Missing OPENAI_API_KEY environment variable");
   }
-const selectedAgent = agentsConfig[agent];
 
-  const response = await client.chat.completions.create({
-    model: "gpt-4o-mini",
-    messages: [
-      { role: "system", content: selectedAgent.systemPrompt },
-      { role: "user", content: prompt },
-    ],
+  const selectedAgent = agentsConfig[agent];
+
+  if (!selectedAgent) {
+    throw new Error(`Agent "${agent}" not found`);
+  }
+
+  const { text } = await generateText({
+    model: openai("gpt-4o-mini"),
+    system: selectedAgent.systemPrompt,
+    prompt: prompt,
   });
 
-  return response.choices[0].message.content;
+  return text;
 }
