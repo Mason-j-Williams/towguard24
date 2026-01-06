@@ -1,16 +1,9 @@
 import { openai } from "@ai-sdk/openai";
 import { generateText } from "ai";
-import { agentsConfig } from "./agentsConfig";
 
-export async function callAI(prompt: string, agent: keyof typeof agentsConfig) {
+export async function callAI(messages: any[]) {
   if (!process.env.GEMINI_API_KEY) {
     throw new Error("Missing GEMINI_API_KEY environment variable");
-  }
-
-  const selectedAgent = agentsConfig[agent];
-
-  if (!selectedAgent) {
-    throw new Error(`Agent "${agent}" not found`);
   }
 
   // Use Gemini via OpenAI-compatible endpoint
@@ -19,9 +12,8 @@ export async function callAI(prompt: string, agent: keyof typeof agentsConfig) {
       baseURL: "https://generativelanguage.googleapis.com/v1beta/openai/",
       apiKey: process.env.GEMINI_API_KEY,
     }),
-    system: selectedAgent.systemPrompt,
-    prompt: prompt,
+    messages: messages,
   });
 
-  return text;
+  return { content: text };
 }
