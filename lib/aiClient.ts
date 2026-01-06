@@ -3,8 +3,8 @@ import { generateText } from "ai";
 import { agentsConfig } from "./agentsConfig";
 
 export async function callAI(prompt: string, agent: keyof typeof agentsConfig) {
-  if (!process.env.OPENAI_API_KEY) {
-    throw new Error("Missing OPENAI_API_KEY environment variable");
+  if (!process.env.GEMINI_API_KEY) {
+    throw new Error("Missing GEMINI_API_KEY environment variable");
   }
 
   const selectedAgent = agentsConfig[agent];
@@ -13,8 +13,12 @@ export async function callAI(prompt: string, agent: keyof typeof agentsConfig) {
     throw new Error(`Agent "${agent}" not found`);
   }
 
+  // Use Gemini via OpenAI-compatible endpoint
   const { text } = await generateText({
-    model: openai("gpt-4o-mini"),
+    model: openai("gemini-2.0-flash-exp", {
+      baseURL: "https://generativelanguage.googleapis.com/v1beta/openai/",
+      apiKey: process.env.GEMINI_API_KEY,
+    }),
     system: selectedAgent.systemPrompt,
     prompt: prompt,
   });
