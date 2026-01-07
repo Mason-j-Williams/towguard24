@@ -181,3 +181,9 @@ const App: React.FC = () => {
 };
 
 export default App;
+git push
+
+mkdir -p src
+touch src/App.tsx
+code src/App.tsx
+
