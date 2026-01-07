@@ -5,10 +5,9 @@ export async function callAI(messages: any[]) {
   if (!process.env.GEMINI_API_KEY) {
     throw new Error("Missing GEMINI_API_KEY environment variable");
   }
-
   // Use Gemini via OpenAI-compatible endpoint
   const { text } = await generateText({
-    model: openai("gemini-2.0-flash-exp", {
+    model: openai("gemini-1.5-flash", {
       baseURL: "https://generativelanguage.googleapis.com/v1beta/openai/",
       apiKey: process.env.GEMINI_API_KEY,
     }),
@@ -17,3 +16,4 @@ export async function callAI(messages: any[]) {
 
   return { content: text };
 }
+ 
