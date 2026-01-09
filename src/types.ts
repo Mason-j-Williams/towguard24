@@ -221,3 +221,51 @@ export const AppViewMap: Record<AppView, RouteConfig> = {
   },
 };
 
+
+// ===============================
+// Chunk 3: Domain Models
+// ===============================
+
+// ---- Incident Record (History, Legal Lab, Forensic Packet) ----
+export interface IncidentRecord extends BaseRecord {
+  date: string;                 // ISO timestamp
+  corridor: string;             // e.g., "I-95 North"
+  type: string;                 // e.g., "Tow Dispatch"
+  status: IncidentStatus;       // CLEARED | PENDING | FAILED
+  amount: number;               // billing amount
+  notes?: string;               // operator notes
+  media?: string[];             // image/video evidence URLs
+  aiSummary?: string;           // AI forensic summary
+}
+
+// ---- Fleet Vehicle (Fleet Ops) ----
+export interface FleetVehicle extends BaseRecord {
+  label: string;                // "Unit 204 · I‑95 North"
+  status: VehicleStatus;        // ONLINE | IDLE | INCIDENT
+  corridor: string;             // current corridor
+  speed: number;                // mph
+  lastPing: string;             // ISO timestamp
+  driverName?: string;
+  metadata?: Record<string, any>;
+}
+
+// ---- Legal Document (Legal Lab) ----
+export interface LegalDocument extends BaseRecord {
+  title: string;                // "Affidavit of Tow Dispatch"
+  category: SOPCategory;        // INCIDENT | FLEET | FINANCE
+  severity: SeverityBand;       // LOW | MEDIUM | HIGH
+  incidentId?: string;          // link to IncidentRecord
+  content: string;              // markdown or plain text
+  official: boolean;            // court-ready flag
+}
+
+// ---- Hardship Case (Hardship Hub) ----
+export interface HardshipCase extends BaseRecord {
+  userId: string;
+  reason: string;               // "Job loss", "Medical emergency", etc.
+  status: "OPEN" | "REVIEW" | "APPROVED" | "DENIED";
+  requestedRelief: number;      // amount requested
+  approvedRelief?: number;      // amount approved
+  notes?: string;
+}
+
