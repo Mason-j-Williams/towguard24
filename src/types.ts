@@ -71,3 +71,153 @@ export interface BaseRecord extends Timestamped {
   id: ID;
 }
 
+
+// ===============================
+// Chunk 2: Navigation + Routing Types
+// ===============================
+
+// ---- Navigation Item ----
+export interface NavItem {
+  label: string;
+  view: AppView;
+  icon?: React.ReactNode;
+  hidden?: boolean; // for admin-only or business-tier views
+}
+
+// ---- Route Configuration ----
+export interface RouteConfig {
+  view: AppView;
+  path: string;
+  title: string;
+  requiresAuth?: boolean;
+  businessTier?: boolean;
+}
+
+// ---- Master AppView Map ----
+// This is used by your router, your sidebar, and v0 for context.
+export const AppViewMap: Record<AppView, RouteConfig> = {
+  [AppView.LANDING]: {
+    view: AppView.LANDING,
+    path: "/",
+    title: "Landing",
+  },
+  [AppView.ONBOARDING]: {
+    view: AppView.ONBOARDING,
+    path: "/onboarding",
+    title: "Onboarding",
+  },
+  [AppView.DASHBOARD]: {
+    view: AppView.DASHBOARD,
+    path: "/dashboard",
+    title: "Dashboard",
+    requiresAuth: true,
+  },
+  [AppView.DISPATCH]: {
+    view: AppView.DISPATCH,
+    path: "/dispatch",
+    title: "Dispatch Center",
+    requiresAuth: true,
+  },
+  [AppView.AGENTS]: {
+    view: AppView.AGENTS,
+    path: "/agents",
+    title: "AI Agents",
+    requiresAuth: true,
+  },
+
+  // Guard Hub
+  [AppView.GUARD_HUB]: {
+    view: AppView.GUARD_HUB,
+    path: "/guard",
+    title: "Guard Hub",
+    requiresAuth: true,
+  },
+  [AppView.SIGN_SCRUTINY]: {
+    view: AppView.SIGN_SCRUTINY,
+    path: "/guard/sign",
+    title: "Sign Scrutiny",
+    requiresAuth: true,
+  },
+  [AppView.FRAUD_SENTRY]: {
+    view: AppView.FRAUD_SENTRY,
+    path: "/guard/fraud",
+    title: "Fraud Sentry",
+    requiresAuth: true,
+  },
+  [AppView.COLLISION_GUARD]: {
+    view: AppView.COLLISION_GUARD,
+    path: "/guard/collision",
+    title: "Collision Guard",
+    requiresAuth: true,
+  },
+
+  // Business Tier
+  [AppView.HQ_BLACK_OPS]: {
+    view: AppView.HQ_BLACK_OPS,
+    path: "/hq",
+    title: "HQ Black-Ops",
+    requiresAuth: true,
+    businessTier: true,
+  },
+  [AppView.FLEET_OPS]: {
+    view: AppView.FLEET_OPS,
+    path: "/fleet",
+    title: "Fleet Ops",
+    requiresAuth: true,
+    businessTier: true,
+  },
+  [AppView.BLUEPRINT]: {
+    view: AppView.BLUEPRINT,
+    path: "/blueprint",
+    title: "Blueprint Library",
+    requiresAuth: true,
+    businessTier: true,
+  },
+
+  // Legal & History
+  [AppView.HISTORY]: {
+    view: AppView.HISTORY,
+    path: "/history",
+    title: "History",
+    requiresAuth: true,
+  },
+  [AppView.LEGAL_LAB]: {
+    view: AppView.LEGAL_LAB,
+    path: "/legal",
+    title: "Legal Lab",
+    requiresAuth: true,
+  },
+  [AppView.FORENSIC_PACKET]: {
+    view: AppView.FORENSIC_PACKET,
+    path: "/packet",
+    title: "Forensic Packet",
+    requiresAuth: true,
+  },
+  [AppView.HARDSHIP_HUB]: {
+    view: AppView.HARDSHIP_HUB,
+    path: "/hardship",
+    title: "Hardship Hub",
+    requiresAuth: true,
+  },
+
+  // AI Communication Layers
+  [AppView.VOICE_ASSISTANT]: {
+    view: AppView.VOICE_ASSISTANT,
+    path: "/voice",
+    title: "Voice Assistant",
+    requiresAuth: true,
+  },
+  [AppView.VIDEO_OPS]: {
+    view: AppView.VIDEO_OPS,
+    path: "/video",
+    title: "Video Ops",
+    requiresAuth: true,
+  },
+  [AppView.AUDIO_DIAGNOSTIC]: {
+    view: AppView.AUDIO_DIAGNOSTIC,
+    path: "/audio",
+    title: "Audio Diagnostic",
+    requiresAuth: true,
+  },
+};
+
