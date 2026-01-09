@@ -269,3 +269,46 @@ export interface HardshipCase extends BaseRecord {
   notes?: string;
 }
 
+
+// ===============================
+// Chunk 4: AI Models & Forensic Types
+// ===============================
+
+// ---- Generic AI Analysis Result ----
+export interface AIAnalysisResult {
+  summary: string;                     // high-level AI explanation
+  confidence?: number;                 // 0–1 confidence score
+  tags?: string[];                     // extracted keywords
+  raw?: any;                           // full model output
+}
+
+// ---- Voice Assistant (Gemini Live) ----
+export interface VoiceSession extends BaseRecord {
+  transcript: string[];                // running transcript
+  status: "IDLE" | "LISTENING" | "PROCESSING" | "RESPONDING";
+  lastInteraction?: string;            // ISO timestamp
+  aiResponse?: string;                 // last Gemini reply
+}
+
+// ---- Video Ops (Veo 3.1 Evidence Generation) ----
+export interface VideoGenerationRequest extends BaseRecord {
+  prompt: string;                      // forensic prompt
+  status: "PENDING" | "GENERATING" | "READY" | "FAILED";
+  resultUrl?: string;                  // URL to generated evidence
+  metadata?: Record<string, any>;
+}
+
+// ---- Forensic Packet (PDF / Evidence Bundle) ----
+export interface ForensicPacket extends BaseRecord {
+  incidentId: string;                  // link to IncidentRecord
+  includedMedia: string[];             // images, audio, video
+  aiSummaries: {
+    sign?: string;
+    fraud?: string;
+    collision?: string;
+    audio?: string;
+  };
+  legalNotes?: string;                 // official notes
+  status: "BUILDING" | "READY" | "FAILED";
+}
+
