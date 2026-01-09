@@ -344,3 +344,30 @@ export interface CollisionGuardResult extends AIAnalysisResult {
   structuralRisk?: boolean;            // frame damage risk
 }
 
+
+// ===============================
+// Chunk 6: Blueprint / SOP Library Types
+// ===============================
+
+// ---- SOP Step ----
+export interface SOPStep {
+  id: ID;
+  title: string;                     // "Secure the scene", "Verify operator", etc.
+  description: string;               // detailed instructions
+  aiHint?: string;                   // optional AI guidance
+  required?: boolean;                // mandatory step
+  estimatedTime?: number;            // minutes
+}
+
+// ---- Blueprint (Operational Playbook) ----
+export interface Blueprint extends BaseRecord {
+  title: string;                     // "Nighttime Tow Protocol"
+  category: SOPCategory;             // INCIDENT | FLEET | FINANCE
+  severity: SeverityBand;            // LOW | MEDIUM | HIGH
+  steps: SOPStep[];                  // ordered list of steps
+  tags?: string[];                   // "night", "collision", "fraud"
+  version: string;                   // "1.0.0"
+  official: boolean;                 // court-ready / DOT-compliant
+  notes?: string;                    // admin notes
+}
+
