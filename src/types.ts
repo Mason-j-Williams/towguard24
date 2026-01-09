@@ -312,3 +312,35 @@ export interface ForensicPacket extends BaseRecord {
   status: "BUILDING" | "READY" | "FAILED";
 }
 
+
+// ===============================
+// Chunk 5: Guard Hub AI Result Types
+// ===============================
+
+// ---- Sign Scrutiny (Road Sign Legitimacy Analysis) ----
+export interface SignScrutinyResult extends AIAnalysisResult {
+  signText?: string;                   // extracted text from the sign
+  locationMatch?: boolean;             // does the sign belong on this corridor
+  regulatoryMatch?: boolean;           // matches DOT / MUTCD standards
+  anomalies?: string[];                // unusual fonts, colors, placement
+  confidenceScore?: number;            // 0–1
+}
+
+// ---- Fraud Sentry (Scam / Fake Operator Detection) ----
+export interface FraudSentryResult extends AIAnalysisResult {
+  operatorName?: string;               // extracted from badge or audio
+  badgeNumber?: string;
+  legitimacyScore?: number;            // 0–1
+  redFlags?: string[];                 // mismatched uniform, fake decals, etc.
+  recommendedAction?: string;          // "Proceed", "Verify", "Avoid"
+}
+
+// ---- Collision Guard (Impact / Damage Analysis) ----
+export interface CollisionGuardResult extends AIAnalysisResult {
+  damageEstimate?: number;             // rough cost estimate
+  impactDirection?: "FRONT" | "REAR" | "SIDE" | "UNKNOWN";
+  severity: SeverityBand;              // LOW | MEDIUM | HIGH
+  affectedZones?: string[];            // "bumper", "quarter panel", etc.
+  structuralRisk?: boolean;            // frame damage risk
+}
+
