@@ -77,5 +77,7 @@ If you want, I can also generate:
 - A **compliance‑oriented enterprise README**  
 
 Just tell me the style you want.
- 
+ docker build -t towguard24 .
+docker run -p 3000:80 towguard24
+
  
