@@ -1,0 +1,26 @@
+# Dependency directories (we install these fresh inside Docker)
+node_modules
+npm-debug.log
+
+# Git version control files
+.git
+.gitignore
+
+# Local Environment Variables (Security Risk: never upload these!)
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Build directories
+build
+dist
+coverage
+
+# Operating System junk files
+.DS_Store
+Thumbs.db
+
+# Editor config files
+.vscode
+.idea
